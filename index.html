@@ -552,28 +552,42 @@ h1,h2,h3{ font-family:'Syne','Cinzel',sans-serif; font-weight:700; margin:0; let
 .card:nth-child(3).rv-in{ transform:translate3d(0, calc(clamp(52px,10vw,148px) + var(--card-parallax-y-3, 0px)), 0); }
 
 .card-fr{
-  position:relative; aspect-ratio:4/5; background:transparent;
-  outline:1px solid var(--line-soft); outline-offset:-1px; border-radius:6px;
-  transition:outline-color .5s var(--ease), box-shadow .5s var(--ease);
+  position:relative; aspect-ratio:4/5; background:#0d1117;
+  outline:1px solid var(--line-soft); outline-offset:-1px; border-radius:8px;
+  overflow:hidden; isolation:isolate;
+  transition:outline-color .5s var(--ease), box-shadow .5s var(--ease), transform .5s var(--ease-out);
 }
-.card:hover .card-fr{ outline-color:rgba(56,189,248,.55); box-shadow:0 24px 60px -15px rgba(0,0,0,.9); }
+.card:hover .card-fr{
+  outline-color:rgba(56,189,248,.65);
+  box-shadow:0 24px 60px -15px rgba(0,0,0,.92), 0 0 30px -8px rgba(56,189,248,.25);
+}
+.card-img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;
+  transform:scale(1.02);
+  filter:brightness(0.64) contrast(1.12) saturate(1.08);
+  transition:transform .85s cubic-bezier(.16,1,.3,1), filter .85s var(--ease);
+}
+.card:hover .card-img{
+  transform:scale(1.08);
+  filter:brightness(0.82) contrast(1.18) saturate(1.22);
+}
 .card:nth-child(1) .card-fr{
   background:
-    linear-gradient(180deg,rgba(6,8,13,.04) 36%,rgba(6,8,13,.82) 100%),
-    url('secret-pathways-assets/generated/temple-approach.webp') center / cover no-repeat;
+    linear-gradient(180deg,rgba(6,8,13,.12) 20%,rgba(6,8,13,.88) 100%),
+    url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80') center / cover no-repeat;
 }
 .card:nth-child(2) .card-fr{
   background:
-    linear-gradient(180deg,rgba(6,8,13,.06) 36%,rgba(6,8,13,.82) 100%),
-    url('secret-pathways-assets/generated/temple-diyas.webp') center / cover no-repeat;
+    linear-gradient(180deg,rgba(6,8,13,.12) 20%,rgba(6,8,13,.88) 100%),
+    url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80') center / cover no-repeat;
 }
 .card:nth-child(3) .card-fr{
   background:
-    linear-gradient(180deg,rgba(6,8,13,.05) 36%,rgba(6,8,13,.82) 100%),
-    url('secret-pathways-assets/generated/temple-pushkarini.webp') center / cover no-repeat;
+    linear-gradient(180deg,rgba(6,8,13,.12) 20%,rgba(6,8,13,.88) 100%),
+    url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80') center / cover no-repeat;
 }
 .card-fr::after{ content:''; position:absolute; inset:0;
-  background:linear-gradient(transparent 46%, rgba(6,8,13,.88)); pointer-events:none; }
+  background:linear-gradient(180deg, rgba(6,8,13,.1) 0%, rgba(6,8,13,.42) 48%, rgba(6,8,13,.94) 96%); pointer-events:none; }
 
 .cloth-out{ position:absolute; pointer-events:none; z-index:1; }
 .on-cloth{ background:none !important; outline:0 !important; overflow:visible; }
@@ -766,6 +780,21 @@ h1,h2,h3{ font-family:'Syne','Cinzel',sans-serif; font-weight:700; margin:0; let
 }
 .modal-close:hover{ border-color:var(--vermilion); color:#fff; background:rgba(56,189,248,.1); }
 .modal-tag{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--vermilion); margin-bottom:8px; }
+.modal-img-wrap{
+  width:100%; height:clamp(160px, 22vw, 240px); border-radius:10px; overflow:hidden;
+  margin-bottom:20px; position:relative; border:1px solid rgba(56,189,248,.25);
+  background:#06080d;
+}
+.modal-img{
+  width:100%; height:100%; object-fit:cover; object-position:center;
+  filter:brightness(0.85) contrast(1.1);
+  transition:transform .8s var(--ease-out);
+}
+.modal-img-wrap::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 45%, rgba(13,17,23,.9) 100%);
+  pointer-events:none;
+}
 .modal-card h3{ font-size:clamp(24px,2.5vw,34px); font-family:'Syne',sans-serif; margin-bottom:14px; }
 .modal-desc{ font-size:15px; line-height:1.7; color:#94a3b8; margin-bottom:24px; }
 .modal-metrics{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; padding:16px 0; border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); }
@@ -1490,6 +1519,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   <div class="cards" id="cards">
     <article class="card" data-rv="up" data-view="0" data-project="0" data-cursor>
       <div class="card-fr" data-frame>
+        <img class="card-img" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" alt="Local Mind OS Neural Interface" loading="lazy" decoding="async" referrerpolicy="no-referrer">
         <span class="card-ar"><svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#f1f5f9" stroke-width="1.3"/></svg></span>
         <i class="glow" style="--gx:78.2%; --gy:24.9%; --gr:24%; --gt:6.1s; --gt2:9.7s; --gc1:rgba(56,189,248,.65); --gc2:rgba(168,85,247,.32)"></i>
         <div class="card-lab"><b>Local Mind OS</b><span class="jp">CONTEXT-AWARE AI OS</span></div>
@@ -1498,6 +1528,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </article>
     <article class="card" data-rv="up" data-view="1" data-project="1" data-cursor>
       <div class="card-fr" data-frame>
+        <img class="card-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="SkillSense AI Recommendation Platform" loading="lazy" decoding="async" referrerpolicy="no-referrer">
         <span class="card-ar"><svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#f1f5f9" stroke-width="1.3"/></svg></span>
         <i class="glow" style="--gx:72.5%; --gy:48.2%; --gr:16%; --gt:3.7s; --gt2:5.3s; --gc1:rgba(0,240,255,.75); --gc2:rgba(56,189,248,.40)"></i>
         <div class="card-lab"><b>SkillSense AI</b><span class="jp">CAREER GUIDANCE PLATFORM</span></div>
@@ -1506,6 +1537,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     </article>
     <article class="card" data-rv="up" data-view="2" data-project="2" data-cursor>
       <div class="card-fr" data-frame>
+        <img class="card-img" src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" alt="Campus Pro Management System" loading="lazy" decoding="async" referrerpolicy="no-referrer">
         <span class="card-ar"><svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#f1f5f9" stroke-width="1.3"/></svg></span>
         <i class="glow" style="--gx:50.0%; --gy:18.8%; --gr:22%; --gt:7.3s; --gt2:11.2s; --gc1:rgba(168,85,247,.65); --gc2:rgba(56,189,248,.30)"></i>
         <div class="card-lab"><b>Campus Pro</b><span class="jp">FULL-STACK MANAGEMENT</span></div>
@@ -1733,7 +1765,10 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   <div class="modal-card">
     <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">✕</button>
     <div class="modal-tag" id="modalTag">CASE STUDY // 01</div>
-    <h3 id="modalTitle">Aetherium Spatial OS</h3>
+    <div class="modal-img-wrap">
+      <img id="modalImg" class="modal-img" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80" alt="Project Preview" loading="lazy" referrerpolicy="no-referrer">
+    </div>
+    <h3 id="modalTitle">Local Mind OS</h3>
     <p class="modal-desc" id="modalDesc">A next-generation spatial computing workspace combining WebGPU accelerated 3D canvas rendering, real-time multi-agent LLM assistance, and zero-latency persistent state replication.</p>
     <div class="modal-metrics">
       <div><b id="m1">60 FPS</b><span>Render Standard</span></div>
@@ -6087,6 +6122,8 @@ const PROJECTS_DATA = [
   {
     tag: 'CASE STUDY // 01',
     title: 'Local Mind OS',
+    img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80',
+    alt: 'Local Mind OS - Context-Aware On-Device AI Neural Network',
     desc: 'Developing an AI-powered operating system focused on workflow automation and intelligent task assistance. Building context-aware AI agents with memory-based interactions and real-time decision-making.',
     m1: 'Agents',
     m1Label: 'Context-Aware AI',
@@ -6099,6 +6136,8 @@ const PROJECTS_DATA = [
   {
     tag: 'CASE STUDY // 02',
     title: 'SkillSense AI',
+    img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+    alt: 'SkillSense AI - Career Guidance & Recommendation Engine',
     desc: 'Built an AI-driven platform that analyzes user skills and interests to provide personalized career recommendations. Developed ML and NLP-based recommendation systems for customized learning paths and skill enhancement.',
     m1: 'ML & NLP',
     m1Label: 'Recommendation Engine',
@@ -6111,6 +6150,8 @@ const PROJECTS_DATA = [
   {
     tag: 'CASE STUDY // 03',
     title: 'Campus Pro',
+    img: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80',
+    alt: 'Campus Pro - Full-Stack Campus Management Platform',
     desc: 'Developed a comprehensive full-stack campus management system for attendance, student records, announcements, and academic workflows. Built responsive UI components and implemented authentication, CRUD operations, and database management.',
     m1: 'Full-Stack',
     m1Label: 'Campus Management',
@@ -6130,6 +6171,12 @@ function openProjectModal(index) {
   document.getElementById('modalTag').textContent = p.tag;
   document.getElementById('modalTitle').textContent = p.title;
   document.getElementById('modalDesc').textContent = p.desc;
+  
+  const modalImg = document.getElementById('modalImg');
+  if (modalImg && p.img) {
+    modalImg.src = p.img;
+    modalImg.alt = p.alt || p.title;
+  }
   
   document.getElementById('m1').textContent = p.m1;
   document.getElementById('m1').nextElementSibling.textContent = p.m1Label;
